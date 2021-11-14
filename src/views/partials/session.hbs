@@ -1,0 +1,12 @@
+<div
+  class="alert alert-success d-flex justify-content-between align-items-center container"
+  role="alert"
+>
+  <h1>Bienvenido {{username}}!</h1>
+  {{#if foto}}
+    <img src="{{foto}}" width="100" alt="" />
+  {{/if}}
+  <a href="/auth/logout" class="btn btn-warning"><span></span>
+    Desloguearse</a>
+</div>
+<script src=""></script>
