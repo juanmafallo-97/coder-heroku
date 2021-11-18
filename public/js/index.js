@@ -11,7 +11,7 @@ document.getElementById("product-form").addEventListener("submit", (e) => {
   const newProduct = {
     title: productTitle.value,
     price: productPrice.value,
-    thumbnail: productImage.value
+    thumbnail: productImage.value,
   };
 
   socket.emit("new-product", newProduct);
@@ -40,7 +40,7 @@ const renderProducts = (products) => {
         <tr>
           <th scope="row" class="align-middle">{{this.title}}</th>
           <td class="align-middle">{{this.price}}</td>
-          <td class="align-middle"><img class="product-image" src={{this.thumbnail}}/></td>
+          <td class="align-middle"><img class="product-image" src={{this.thumbnail}}></td>
         </tr>
       {{/each}}
     </tbody>
@@ -86,7 +86,7 @@ document.getElementById("message-form").addEventListener("submit", (e) => {
   const newMessage = {
     email,
     content: content.value,
-    time
+    time,
   };
 
   socket.emit("new-message", newMessage);

@@ -1,5 +1,6 @@
 const config = require("../DB/sqlite3Config");
 const knex = require("knex")(config);
+const { logApiError } = require("../utils/logger");
 
 class MessagesApi {
   async save(message) {
@@ -7,9 +8,9 @@ class MessagesApi {
       const newMewssageId = await knex("messages").insert(message);
       return await knex("messages").where("id", newMewssageId);
     } catch (error) {
-      throw new Error(
-        "Ha ocurrido un error escribiendo los datos: " + error.message
-      );
+      const errorMessage = `Ha ocurrido un error escribiendo los datos: ${error.message}`;
+      logApiError(errorMessage);
+      throw new Error(errorMessage);
     }
   }
 
@@ -18,9 +19,8 @@ class MessagesApi {
       const messages = await knex("messages");
       return messages;
     } catch (error) {
-      throw new Error(
-        "Ha ocurrido un error obteniendo los datos: " + error.message
-      );
+      const errorMessage = `Ha ocurrido un error obteniendo los datos: ${error.message}`;
+      throw new Error(errorMessage);
     }
   }
 }
