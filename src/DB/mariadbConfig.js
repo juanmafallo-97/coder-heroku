@@ -4,8 +4,8 @@ const config = {
   client: "mysql2",
   connection: {
     host: process.env.MARIADB_HOST,
-    user: "newuser",
-    password: "password",
+    user: process.env.MARIADB_HOST,
+    password: "",
     database: process.env.MARIADB_DATABASE
   }
 };

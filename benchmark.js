@@ -8,7 +8,7 @@ function run(url) {
   const inst = autocannon({
     url,
     connections: 100,
-    duration: 20,
+    duration: 20
   });
 
   autocannon.track(inst, { outputStream });
@@ -21,4 +21,3 @@ function run(url) {
 console.log("Running all benchmarks");
 
 run("http://localhost:9090/api/info");
-// run('http://localhost:3000/auth-nobloq?userName=Diego&password=123456')
