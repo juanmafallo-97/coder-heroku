@@ -22,7 +22,6 @@
     "express-session": "^1.17.2",
     "faker": "^5.5.3",
     "knex": "^0.95.11",
-    "minimist": "^1.2.5",
     "mongoose": "^6.0.12",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.2",

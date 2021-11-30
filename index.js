@@ -18,8 +18,6 @@ const io = require("socket.io")(httpServer, {
 });
 require("./src/DB/mongoConnection");
 
-const { port, modo } = require("./src/utils/minimist");
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
@@ -73,7 +71,7 @@ if (modo === "cluster" && cluster.isMaster) {
     console.log(`El proceso ${process.pid} terminó con código ${code}`);
   });
 
-  httpServer.listen(port, () =>
+  httpServer.listen(process.env.PORT || 8080, () =>
     console.log("Servidor activo en puerto: " + port)
   );
 }
