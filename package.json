@@ -5,9 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
-    "dev:fork": "nodemon index.js -p 9091",
-    "dev:cluster": "nodemon index.js -m cluster -p 9092"
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",

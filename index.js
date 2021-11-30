@@ -55,23 +55,6 @@ app.use(compression());
 
 app.use("/", router);
 
-/*   Cluster   */
-if (modo === "cluster" && cluster.isMaster) {
-  console.log("Modo:", modo);
-  for (let i = 0; i < cpus().length; i++) {
-    cluster.fork();
-    console.log(`CPU: ${i}`);
-  }
-  cluster.on("exit", (worker) => {
-    console.log(`El proceso ${worker.process.pid} terminó`);
-    cluster.fork();
-  });
-} else {
-  process.on("exit", (code) => {
-    console.log(`El proceso ${process.pid} terminó con código ${code}`);
-  });
-
-  httpServer.listen(process.env.PORT || 8080, () =>
-    console.log("Servidor activo en puerto: " + port)
-  );
-}
+httpServer.listen(process.env.PORT || 8080, () =>
+  console.log("Servidor activo en puerto: " + port)
+);
