@@ -18,6 +18,8 @@ const io = require("socket.io")(httpServer, {
 });
 require("./src/DB/mongoConnection");
 
+const PORT = process.env.PORT || 8080;
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
@@ -55,6 +57,6 @@ app.use(compression());
 
 app.use("/", router);
 
-httpServer.listen(process.env.PORT || 8080, () =>
-  console.log("Servidor activo en puerto: " + port)
+httpServer.listen(PORT, () =>
+  console.log("Servidor activo en puerto: " + PORT)
 );
