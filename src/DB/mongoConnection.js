@@ -1,11 +1,13 @@
-//Conexión a la base de datos para mantener usuarios
 require("dotenv").config();
 const mongoose = require("mongoose");
 
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+mongoose.connect(
+  "mongodb+srv://coder:coder321@cluster0.jiiuc.mongodb.net/coder-heroku?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }
+);
 
 mongoose.connection.once("open", () => {
   console.log("Conectado a MongoDB exitosamente");

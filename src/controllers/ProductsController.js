@@ -1,12 +1,11 @@
-const config = require("../DB/mariadbConfig");
-const knex = require("knex")(config);
+const Product = require("../models/Product");
 const { logApiError } = require("../utils/logger");
 
 class ProductsController {
   async save(product) {
     try {
-      const newProductId = await knex("products").insert(product);
-      return await knex("products").where("id", newProductId);
+      const newProduct = await Product.create(product);
+      return newProduct;
     } catch (error) {
       const errorMessage = `Ha ocurrido un error escribiendo los datos:  ${error.message}`;
       logApiError(errorMessage);
@@ -16,7 +15,7 @@ class ProductsController {
 
   async getById(id) {
     try {
-      const product = await knex("products").where("id", id);
+      const product = await Product.findById(id);
       if (product.length === 0)
         throw new Error("No existe el producto con el id especificado");
       return product;
@@ -29,7 +28,7 @@ class ProductsController {
 
   async getAll() {
     try {
-      const allProducts = await knex("products");
+      const allProducts = await Product.find();
       return allProducts;
     } catch (error) {
       const errorMessage = `Ha ocurrido un error obteniendo los datos:  ${error.message}`;
@@ -40,8 +39,9 @@ class ProductsController {
 
   async updateProduct(id, updatedProduct) {
     try {
-      await knex("products").where("id", id).update(updatedProduct);
-      return knex("products").where("id", id);
+      await Product.findByIdAndUpdate(id, updatedProduct);
+      const newProduct = await Product.findById(id);
+      return newProduct;
     } catch (error) {
       const errorMessage = `Ha ocurrido un error actualizando el producto:  ${error.message}`;
       logApiError(errorMessage);
@@ -51,9 +51,10 @@ class ProductsController {
 
   async deleteById(id) {
     try {
-      const deletedProduct = await knex("products").where("id", id).del();
-      if (!deletedProduct)
+      const productToDelete = await Product.findById(id);
+      if (!productToDelete)
         throw new Error("No existe el producto con el id especificado");
+      await findByIdAndDelete(id);
     } catch (error) {
       const errorMessage = `Ha ocurrido un error borrando el producto:  ${error.message}`;
       logApiError(errorMessage);
